@@ -68,6 +68,20 @@ commands:
               npm run migrations:revert
             fi
 
+  awsforansible:
+    description: installing aws cli
+    steps:
+      - run:
+          name: installation of pip and aws cli
+          command: |
+            apk add --no-cache \
+            python3 \
+            py3-pip \
+            && pip3 install --upgrade pip \
+            && pip3 install \
+            awscli \
+            && rm -rf /var/cache/apk/*
+
 jobs:
   build-frontend:
     docker:
@@ -316,6 +330,15 @@ jobs:
       - restore_cache:
           keys: [backend-build]
       - run:
+          name: Install dependencies
+          command: |
+            apk add --update tar gzip ansible nodejs npm curl jq
+      - run:
+          name: installing shell
+          command: |
+            apk add openssh-client
+      - awsforansible
+      - run:
           name: Deploy backend
           command: |
             cd backend
@@ -347,6 +370,13 @@ jobs:
       - checkout
       - install_awscli
       - install_nodejs
+      - awsforansible
+      - attach_workspace:
+          at: .circleci/ansible/
+      - run:
+          name: Install dependencies
+          command: |
+            apk add --update tar gzip ansible nodejs npm curl jq
       - run:
           name: Backend smoke test.
           command: |
