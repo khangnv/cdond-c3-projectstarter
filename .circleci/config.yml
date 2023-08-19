@@ -220,14 +220,14 @@ jobs:
       - add_ssh_keys:
           fingerprints: ["28:ed:f2:01:6e:1a:e5:f0:75:6f:76:40:db:15:93:97"]
       - attach_workspace:
-          at: .circleci/ansible/
+          at: ~/
       - run:
           name: Configure server
           command: |
             cd .circleci/ansible
             cat inventory.txt
             export ANSIBLE_HOST_KEY_CHECKING=false
-            ansible-playbook -i ./ansible/inventory.txt ./ansible/configure-server.yml
+            ansible-playbook -i inventory.txt configure-server.yml
       - destroy-environment
 
   run-migrations:
@@ -307,7 +307,7 @@ jobs:
       - add_ssh_keys:
           fingerprints: ["28:ed:f2:01:6e:1a:e5:f0:75:6f:76:40:db:15:93:97"]
       - attach_workspace:
-          at: .circleci/ansible/
+          at: ~/
       - restore_cache:
           keys: [backend-build]
       - run:
@@ -331,7 +331,7 @@ jobs:
             export TYPEORM_MIGRATIONS=./migrations/*.ts
             cd .circleci/ansible
             cat inventory.txt
-            ansible-playbook -i ./ansible/inventory.txt ./ansible/deploy-backend.yml
+            ansible-playbook -i inventory.txt deploy-backend.yml
       - destroy-environment
       - revert-migrations
 
@@ -343,7 +343,7 @@ jobs:
       - install_awscli
       - install_nodejs
       - attach_workspace:
-          at: .circleci/ansible/
+          at: ~/
       - run:
           name: Install dependencies
           command: |
