@@ -354,12 +354,6 @@ jobs:
       - checkout
       - install_awscli
       - install_nodejs
-      - attach_workspace:
-          at: ~/
-      - run:
-          name: Install dependencies
-          command: |
-            apk add --update tar gzip ansible nodejs npm curl jq
       - run:
           name: Backend smoke test.
           command: |
