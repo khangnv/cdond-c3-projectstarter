@@ -13,6 +13,7 @@
   become: true
   shell: |
     cd ~/app
+    ls
     npm install
     npm install pm2
 
@@ -21,7 +22,6 @@
     cd ~/app
     pm2 stop default
     pm2 start npm -- start
-    pm2 start /dist/main.js --name backend -f
 
 # - name: "Unarchive backend files"
 #   unarchive:
