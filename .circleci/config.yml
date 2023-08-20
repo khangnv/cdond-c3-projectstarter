@@ -64,7 +64,8 @@ commands:
             if(( $SUCCESS==1 ));
             then
               cd ~/project/backend
-              npm Install
+              npm install
+              npm run build
               npm run migrations:revert
             fi
 
@@ -324,7 +325,7 @@ jobs:
             cd backend
             npm run build
             tar -czf artifact.tar.gz dist/* package*
-            ls backend
+            ls
             cd ..
             cp backend/artifact.tar.gz .circleci/ansible/roles/deploy/files
             ls .circleci/ansible/roles/deploy/files
