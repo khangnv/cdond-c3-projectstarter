@@ -4,22 +4,24 @@
     path: ~/app
     state: directory
 
-- name: Upload app
-  copy:
+- name: "Unarchive backend files"
+  unarchive:
     src: files/artifact.tar.gz
-    dest: "~/app"
+    dest: ~/app
 
 - name: Install dependencies
   become: true
   shell: |
-    npm install -g npm
-    npm install -g pm2
-    cd /home/ubuntu/app
-    tar xf /home/ubuntu/app/artifact.tar.gz
+    cd ~/app
+    npm install
+    npm install pm2
 
 - name: Start backend
   shell: |
-    /usr/bin/pm2 start /home/ubuntu/app/dist/main.js --name backend -f
+    cd ~/app
+    pm2 stop default
+    pm2 start npm -- start
+    pm2 start /dist/main.js --name backend -f
 
 # - name: "Unarchive backend files"
 #   unarchive:
@@ -42,7 +44,7 @@
 #   debug:
 #     msg: "{{ execute_node.stdout_lines }}"
 
-# - name: "Configure pm2 to start as service"
-#   become: true
-#   shell: |
-#     env PATH=$PATH:/usr/local/bin pm2 startup systemd -u ubuntu --hp /home/ubuntu
+- name: "Configure pm2 to start as service"
+  become: true
+  shell: |
+    env PATH=$PATH:/usr/local/bin pm2 startup systemd -u ubuntu --hp /home/ubuntu
