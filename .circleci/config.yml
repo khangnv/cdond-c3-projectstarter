@@ -361,8 +361,6 @@ jobs:
             cat backend/.env
 
             tar -C backend -czvf artifact.tar.gz .
-            cd /root/project/.circleci/ansible
-            ansible-playbook -i inventory.txt deploy-backend.yml
             cd .circleci/ansible
             cat inventory.txt
             ansible-playbook -i inventory.txt deploy-backend.yml
@@ -405,7 +403,7 @@ jobs:
               exit 0
             else
               echo "Failed to call frontend url."
-              # exit 1
+              exit 1
             fi
       - destroy-environment
       - revert-migrations
