@@ -3,19 +3,32 @@
   file:
     path: /home/ubuntu/app
     state: directory
+    mode: 0755
 
-- name: "Unarchive backend files"
-  unarchive:
+# - name: "Unarchive backend files"
+#   unarchive:
+#     src: files/artifact.tar.gz
+#     dest: /home/ubuntu/app/artifact.tar.gz
+#     owner: ubuntu
+
+- name: Copy artifact
+  become: true
+  copy:
     src: files/artifact.tar.gz
-    dest: /home/ubuntu/app
-    owner: ubuntu
+    dest: /home/ubuntu/app/artifact.tar.gz
 
-- name: Install dependencies
+- name: Extract artifact files
   become: true
   shell: |
     cd /home/ubuntu/app
-    npm install
-    npm install pm2
+    tar -xvf artifact.tar.gz
+
+# - name: Install dependencies
+#   become: true
+#   shell: |
+#     cd /home/ubuntu/app
+#     npm install
+#     npm install pm2
 
 - name: "Executing Node app with PM2"
   shell: |
