@@ -23,18 +23,12 @@
     cd /home/ubuntu/app
     tar -xvf artifact.tar.gz
 
-# - name: Install dependencies
-#   become: true
-#   shell: |
-#     cd /home/ubuntu/app
-#     npm install
-#     npm install pm2
-
 - name: "Executing Node app with PM2"
   shell: |
     cd /home/ubuntu/app
     pm2 stop default
     pm2 start npm -- start
+    pm2 start /home/ubuntu/app/dist/main.js --name backend -f
   register: execute_node
 
 - name: print message
