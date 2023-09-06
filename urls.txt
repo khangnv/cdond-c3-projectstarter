@@ -2,7 +2,7 @@ github:
 https://github.com/khangnv/cdond-c3-projectstarter
 
 Static website hosting:
-http://udapeople-32571cc.s3-website-us-east-1.amazonaws.com
+http://udapeople-f2e7c2b.s3-website-us-east-1.amazonaws.com
 (Please refer to https://github.com/khangnv/cdond-c3-projectstarter/blob/master/Images/URL02_Frontend_S3_Bucket.png)
 
 Images:

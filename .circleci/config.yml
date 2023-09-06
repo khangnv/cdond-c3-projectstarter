@@ -384,7 +384,7 @@ jobs:
             cd backend
             npm install
             npm run build
-            tar -czf artifact.tar.gz dist/* package*
+            tar -C backend -czvf artifact.tar.gz .
             echo "Check if artifact.tar.gz is available."
             ls
 
