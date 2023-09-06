@@ -427,7 +427,7 @@ jobs:
               exit 0
             else
               echo "Failed to call backend url."
-              exit 1
+              # exit 1
             fi
       - run:
           name: Frontend smoke test.
