@@ -5,12 +5,6 @@
     state: directory
     mode: 0755
 
-# - name: "Unarchive backend files"
-#   unarchive:
-#     src: files/artifact.tar.gz
-#     dest: /home/ubuntu/app/artifact.tar.gz
-#     owner: ubuntu
-
 - name: Copy artifact
   become: true
   copy:
