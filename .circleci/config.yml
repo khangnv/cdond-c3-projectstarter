@@ -390,7 +390,6 @@ jobs:
             echo "Check if artifact.tar.gz is available."
             ls
 
-            cd ..
             echo "Creating .circleci/ansible/roles/deploy/files"
             mkdir -p ~/project/.circleci/ansible/roles/deploy/files/
 
