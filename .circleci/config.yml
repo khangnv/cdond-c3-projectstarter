@@ -393,7 +393,7 @@ jobs:
             echo "Creating .circleci/ansible/roles/deploy/files"
             mkdir -p ~/project/.circleci/ansible/roles/deploy/files/
 
-            cp -v backend/artifact.tar.gz .circleci/ansible/roles/deploy/files
+            cp -v artifact.tar.gz .circleci/ansible/roles/deploy/files
             echo "Check if artifact.tar.gz is copied."
             ls .circleci/ansible/roles/deploy/files
       - run:
